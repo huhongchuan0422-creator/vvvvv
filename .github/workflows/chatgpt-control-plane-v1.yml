@@ -1,12 +1,17 @@
 name: ChatGPT Control Plane V1
 
 on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - ".chatgpt-control-plane/v1/**"
+      - ".github/workflows/chatgpt-control-plane-v1.yml"
   push:
     branches:
       - chatgpt-control-plane-v1
     paths:
       - ".chatgpt-control-plane/v1/**"
-      - ".github/workflows/chatgpt-control-plane-v1.yml"
   workflow_dispatch:
 
 permissions:
