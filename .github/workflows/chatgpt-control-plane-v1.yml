@@ -1,0 +1,33 @@
+name: ChatGPT Control Plane V1
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - ".chatgpt-control-plane/v1/**"
+      - ".github/workflows/chatgpt-control-plane-v1.yml"
+  push:
+    branches:
+      - chatgpt-control-plane-v1
+    paths:
+      - ".chatgpt-control-plane/v1/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run deterministic proof
+        working-directory: .chatgpt-control-plane/v1
+        run: python -m unittest -v test_control.py
